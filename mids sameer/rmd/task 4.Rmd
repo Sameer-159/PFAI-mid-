@@ -1,0 +1,69 @@
+---
+title: "task 4"
+author: "Sameer"
+date: "2025-04-23"
+output: html_document
+---
+
+
+
+# Task
+machine learning with caret use the caret package to train a linear regression model predicting mpg from other variables in mtcars dataset. Write code to preprocess the data (e.g. scaling ), split it into training and testing sets, train the model and evaluate its performance using metrics like RMSE 
+
+```{r}
+library(caret)
+```
+
+```{r}
+data(mtcars)
+```
+
+```{r}
+set.seed(123)
+```
+
+```{r}
+trainIndex <- createDataPartition(mtcars$mpg, p = 0.8, list = FALSE)
+trainData <- mtcars[trainIndex, ]
+testData <- mtcars[-trainIndex, ]
+```
+
+```{r}
+preProcess_params <- preProcess(trainData, method = c("center", "scale"))
+```
+
+```{r}
+trainTransformed <- predict(preProcess_params, trainData)
+testTransformed <- predict(preProcess_params, testData)
+```
+
+```{r}
+model <- train(
+  mpg ~ ., 
+  data = trainTransformed, 
+  method = "lm", 
+  trControl = trainControl(method = "cv", number = 10)
+)
+```
+
+```{r}
+print(summary(model))
+```
+
+```{r}
+predictions <- predict(model, newdata = testTransformed)
+```
+
+```{r}
+rmse <- RMSE(predictions, testTransformed$mpg)
+r2 <- R2(predictions, testTransformed$mpg)
+```
+
+```{r}
+data(mtcars)
+```
+
+```{r}
+cat("RMSE on test set:", rmse, "\n")
+cat("R-squared on test set:", r2, "\n")
+```

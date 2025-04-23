@@ -1,0 +1,78 @@
+---
+title: "task 2"
+author: "Sameer"
+date: "2025-04-23"
+output: html_document
+---
+
+# task
+data visualization witth ggplot 2 create a scatter plot using ggplot2 library to show the relation between wt and mpg in the mtcars dataset. customize the plot to include a title, axis labels and a regression line
+# Include library
+first we have to call library ggplot2 which is used for or creating data visualizations based on the "Grammar of Graphics." It's used to create plots by providing data, defining aesthetics (how data maps to visual elements), specifying graphical primitives, and adding layers
+```{r}
+library(ggplot2)
+```
+
+# Load Dataset
+```{r}
+data(mtcars)
+```
+
+head will print first five rows of dataset
+```{r}
+head(mtcars)
+```
+# plot
+now we use ggplot2 to create a plot showing the relationship between car weight (wt) and fuel efficiency (mpg) using the mtcars dataset. 
+
+
+X and Y Axes: Plots car weight (wt) on the x-axis and fuel efficiency (mpg) on the y-axis.
+
+Scatterplot: Adds points with:
+
+Size 3
+
+Shape 21 (allows border and fill)
+
+Black border and steelblue fill
+
+Trend Line: Adds a red linear regression line with:
+
+Pink shaded confidence area (standard error)
+
+Labels: Adds a title, subtitle, and axis labels.
+
+Theme: Uses a clean minimal theme.
+
+Styling:
+
+Title is bold and centered
+
+Subtitle is also centered
+```{r}
+ggplot(mtcars, aes(x=wt,y=mpg))+
+  geom_point(
+    size=3,
+    shape=21,
+    color="black",
+    fill="steelblue"
+  )+
+  geom_smooth(
+    method="lm",
+    se=TRUE,
+    color="Red",
+    fill="Pink"
+  )+
+  labs(
+    title="Relation between Car Weight (wt) and fuel Efficiency",
+    subtitle="mtcars Dataset",
+    x="Weight (wt)",
+    y="Miles Per Gallon (mpg)"
+  )+
+    theme_minimal()+
+    theme(
+      plot.title=element_text(hjust=0.5,face="bold"),
+      plot.subtitle=element_text(hjust=0.5)
+    )
+```
+

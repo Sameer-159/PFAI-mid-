@@ -1,0 +1,43 @@
+---
+title: "task 1"
+author: "Sameer"
+date: "2025-04-23"
+output: html_document
+---
+## Task 1
+Use the mtcars dataset in r demonstrate how to filter rows where the mpg is greater than  and arrange the results in descending order of hp using the dplyr:
+
+## Including Library
+
+First include the library dplyr which is used for data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges: mutate() adds new variables that are functions of existing variables. select() picks variables based on their names.
+
+```{r}
+library(dplyr)
+```
+
+# calling Dataset
+```{r}
+data(mtcars)
+```
+# prnting first five rows of dataset
+```{r}
+head(mtcars)
+```
+
+# filtering rows where mpg is greater than 20 and arranging them is descending order
+filter will filter the data so that we can have only filtered dataset 
+Arrange will arrange the dataset to be in descending order
+```{r}
+result<-mtcars %>%
+  filter(mpg>20) %>%
+  arrange(desc(hp))
+```
+
+```{r}
+print(result)
+```
+
+```{r}
+head(result)
+```
+

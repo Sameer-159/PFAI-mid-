@@ -1,0 +1,104 @@
+---
+title: "task 3"
+author: "Sameer"
+date: "2025-04-23"
+output: html_document
+---
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+simple 
+```{r}
+data<-c(9.5,10.2,11.1,9.8,9.7,10.6,9.2,11.4,10.3)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+```{r}
+print(data)
+```
+
+```{r}
+t_test<-t.test(data,mu=10)
+```
+
+```{r}
+print(t_test)
+```
+# With intrpretation
+# Null Hypothesis is rehjected
+```{r}
+set.seed(123)
+sample_data <- rnorm(30, mean = 10.5, sd = 1.2)
+sample_data2 <- rnorm(30, mean = 10.1, sd = 1.5)  # Small deviation from μ=10
+```
+
+```{r}
+print(sample_data)
+```
+
+```{r}
+hist(sample_data, main = "Distribution of Sample Data", col = "lightblue")
+abline(v = 10, col = "red", lwd = 2)
+```
+
+```{r}
+test_result <- t.test(sample_data, mu = 10, conf.level = 0.95)
+```
+
+```{r}
+cat("One Sample t-test\n\n")
+cat("Sample Data:", round(sample_data, 2), "\n")
+cat("Sample Mean:", mean(sample_data), "\n")
+cat("\nTest Results:\n")
+print(test_result)
+```
+
+```{r}
+if(test_result$p.value < 0.05) {
+  cat("\nConclusion: Reject null hypothesis - the mean is significantly different from 10 (p =",
+      round(test_result$p.value, 4), ")")
+} else {
+  cat("\nConclusion: Fail to reject null hypothesis - no significant difference from 10 (p =",
+      round(test_result$p.value, 4), ")")
+}
+```
+# where null hypothesis is not rejected
+```{r}
+print(sample_data2)
+```
+
+```{r}
+hist(sample_data2, main = "Distribution of Sample Data", col = "lightblue")
+abline(v = 10, col = "red", lwd = 2)
+```
+
+```{r}
+test_result2 <- t.test(sample_data2, mu = 10, conf.level = 0.95)
+```
+
+```{r}
+cat("One Sample t-test\n\n")
+cat("Sample Data:", round(sample_data2, 2), "\n")
+cat("Sample Mean:", mean(sample_data2), "\n")
+cat("\nTest Results:\n")
+print(test_result2)
+```
+
+```{r}
+if(test_result2$p.value < 0.05) {
+  cat("\nConclusion: Reject null hypothesis - the mean is significantly different from 10 (p =",
+      round(test_result2$p.value, 4), ")")
+} else {
+  cat("\nConclusion: Fail to reject null hypothesis - no significant difference from 10 (p =",
+      round(test_result2$p.value, 4), ")")
+}
+```
+
+
